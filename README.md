@@ -13,6 +13,7 @@ This project integrates Planka with the Model Context Protocol (MCP) server, all
    ```bash
    npm install
    ```
+
 2. **Configure environment variables:**
    Create a `.env` file in the project root:
    ```env
@@ -20,10 +21,36 @@ This project integrates Planka with the Model Context Protocol (MCP) server, all
    PLANKA_PASSWORD=admin
    PLANKA_API_URL=http://example.com/api
    ```
-3. **Run the server:**
+
+3. **Build and run the MCP server locally:**
+   First, build the project:
    ```bash
-   npm start
+   npm run build
    ```
+   Then, start the MCP server using npx and node:
+   ```bash
+   npx node dist/index.js
+   ```
+   This will start the MCP server and expose your Planka integration.
+
+4. **Configure VS Code integration (optional):**
+   To connect VS Code to your locally built MCP server, create a `.vscode/mcp.json` file in your project root. Example:
+   ```jsonc
+   {
+     "servers": {
+       "planka": {
+         "type": "stdio",
+         "command": "npx",
+         "args": [
+           "-y",
+           "node",
+           "dist/index.js"
+         ]
+       }
+     }
+   }
+   ```
+   This configuration allows VS Code to launch and connect to your MCP server using the local build.
 
 ## Project Structure
 - `src/index.ts`: Main entry point

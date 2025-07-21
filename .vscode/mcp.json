@@ -1,17 +1,5 @@
 {
 	"servers": {
-		"vikunja": {
-			"command": "npx",
-			"args": [
-				"-y",
-				"vikunja-mcp"
-			],
-			"env": {
-				"VIKUNJA_API_BASE": "https://todo.hexidev.nl",
-				"VIKUNJA_API_TOKEN": "tk_38c6c02d4825c1551219a401374e188fbfc75dff"
-			},
-			"type": "stdio"
-		},
 		"planka": {
 			"type": "stdio",
 			"command": "npx",
@@ -20,6 +8,6 @@
 				"node",
 				"/root/planka-mcp/dist/index.js"
 			]
-		}
+		},
 	}
 }
