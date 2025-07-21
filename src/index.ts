@@ -1,7 +1,6 @@
 import { McpServer, ResourceTemplate } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js";
-import { z } from "zod";
-import { Planka, plankaColors } from "./lib/planka.js";
+import { Planka } from "./lib/planka.js";
 import { readdirSync } from "fs";
 import { dirname, join, basename } from "path";
 import { fileURLToPath } from "url";
