@@ -55,7 +55,22 @@ This project integrates Planka with the Model Context Protocol (MCP) server, all
 ## Project Structure
 - `src/index.ts`: Main entry point
 - `src/lib/planka.ts`: Planka API integration
+
 - `src/tools/`: MCP resource tools (boards, cards, lists, labels, projects)
+
+## TODO
+
+- [ ] Publish a real release to enable NPX usage
+- [x] Board management tool (`src/tools/boards.ts`)
+- [x] Card management tool (`src/tools/cards.ts`)
+- [x] List management tool (`src/tools/lists.ts`)
+- [x] Label management tool (`src/tools/labels.ts`)
+- [x] Project management tool (`src/tools/projects.ts`)
+- [ ] Support assigning members to cards
+- [ ] Enhance label management (e.g., editing, deleting, filtering)
+- [ ] Add support for card tasks/subtasks (checklists)
+- [ ] Add support for file attachments on cards
+- [ ] Implement card task lists with completion tracking
 
 ## License
 MIT
