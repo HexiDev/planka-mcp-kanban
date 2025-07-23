@@ -3,7 +3,7 @@
 This project integrates Planka with the Model Context Protocol (MCP) server, allowing you to manage Planka boards, cards, lists, and labels via MCP.
 
 ## Features
-- MCP server for Planka
+- MCP server for Planka **V2**
 - Dynamic tool registration for Planka resources
 - Environment variable support via `.env`
 
@@ -59,4 +59,3 @@ This project integrates Planka with the Model Context Protocol (MCP) server, all
 
 ## License
 MIT
-# planka-mcp-kanban
