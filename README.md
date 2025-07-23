@@ -72,7 +72,7 @@ This project integrates Planka with the Model Context Protocol (MCP) server, all
 - [ ] Add support for file attachments on cards
 - [ ] Implement card task lists with completion tracking
 
-**⚠️ Note:** Label assignment is not supported due to a bug with the Planka API.
+**⚠️ Note:** Label assignment to as card is not supported due to a bug with the Planka API.
 
 ## License
 MIT
