@@ -35,6 +35,10 @@ The recommended way to run the MCP server for development is via VS Code integra
    ```
    Use this if you want to run the published package without building locally.
 
+   > **Note:** Ensure you have a `.env` file in your project root with the required environment variables (`PLANKA_EMAIL_OR_USERNAME`, `PLANKA_PASSWORD`, `PLANKA_API_URL`) or set them in your environment before running `npx planka-mcp`.
+
+   > **Update:** As of v1.0.3, the published package includes all required files and works with `npx planka-mcp`.
+
    > **Note:** This approach can also be used in any other MCP-ready editor (such as Cursor, Windsurf, etc.), though it has only been tested in VS Code so far.
 
 2. **Build and run the server:**
