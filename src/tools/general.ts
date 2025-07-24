@@ -6,6 +6,7 @@ export default (server: McpServer, planka: Planka) => {
 		"get_available_colors",
 		{
 			title: "Gets the available colors for labels, lists and cards",
+			description: "Returns a list of colors that can be used for labels, lists, and cards in Planka.",
 			inputSchema: {
 			}
 		},
@@ -19,6 +20,7 @@ export default (server: McpServer, planka: Planka) => {
 		"get_available_gradients",
 		{
 			title: "Gets the available gradients for the project background",
+			description: "Returns a list of gradients that can be used for the project background in Planka.",
 			inputSchema: {
 			}
 		},

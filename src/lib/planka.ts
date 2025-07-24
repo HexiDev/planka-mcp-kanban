@@ -814,4 +814,39 @@ export class Planka {
 		return responseJson.item;
 	}
 
+	// member-related methods
+	async getMembers(projectId?: string): Promise<PlankaUser[]> {
+		const project = await this.getProject(projectId);
+
+		if (!project) {
+			throw new Error("No project selected. Use selectProject(projectId) to select a project or provide projectId.");
+		}
+		const members = project.included.users.filter(user => user.isDeactivated === false);
+		return members
+	}
+	async assignMemberToCard(cardId: string, userId: string): Promise<any> {
+		const responseJson = await this.plankaFetch(
+			`${this.baseUrl}/cards/${cardId}/card-memberships`,
+			{
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json'
+				},
+				body: JSON.stringify({ userId })
+			}
+		);
+		return responseJson.item;
+	}
+	async removeMemberFromCard(cardId: string, userId: string): Promise<any> {
+		const responseJson = await this.plankaFetch(
+			`${this.baseUrl}/cards/${cardId}/card-memberships/userid:${userId}`,
+			{
+				method: 'DELETE',
+				headers: {
+					'Content-Type': 'application/json'
+				}
+			}
+		);
+		return responseJson;
+	}
 }
