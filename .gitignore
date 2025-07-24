@@ -1,4 +1,5 @@
 # Node modules
+.github/chatmodes/claude-like.chatmode.md
 node_modules/
 
 # Environment variables

@@ -849,4 +849,84 @@ export class Planka {
 		);
 		return responseJson;
 	}
+// task-list related methods
+async createTaskList(cardId: string, name: string, showOnFrontOfCard: boolean = true, position: number = 131072): Promise<any> {
+	const responseJson = await this.plankaFetch(
+		`${this.baseUrl}/cards/${cardId}/task-lists`,
+		{
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json'
+			},
+			body: JSON.stringify({ name, showOnFrontOfCard, position })
+		}
+	);
+	return responseJson.item;
+}
+async createTask(taskListId: string, name: string, position: number = 65536): Promise<any> {
+	const responseJson = await this.plankaFetch(
+		`${this.baseUrl}/task-lists/${taskListId}/tasks`,
+		{
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json'
+			},
+			body: JSON.stringify({ name, position })
+		}
+	);
+	return responseJson.item;
+}
+
+/**
+ * Delete a task list by ID
+ * @param taskListId The ID of the task list
+ */
+async deleteTaskList(taskListId: string): Promise<any> {
+  const responseJson = await this.plankaFetch(
+	`${this.baseUrl}/task-lists/${taskListId}`,
+	{
+	  method: 'DELETE',
+	  headers: {
+		'Content-Type': 'application/json'
+	  }
+	}
+  );
+  return responseJson;
+}
+
+/**
+ * Update a task's completion status (toggle complete/incomplete)
+ * @param taskId The ID of the task
+ * @param isCompleted Whether the task is completed
+ */
+async updateTaskCompletion(taskId: string, isCompleted: boolean): Promise<any> {
+	const responseJson = await this.plankaFetch(
+		`${this.baseUrl}/tasks/${taskId}`,
+		{
+			method: 'PATCH',
+			headers: {
+				'Content-Type': 'application/json'
+			},
+			body: JSON.stringify({ isCompleted })
+		}
+	);
+	return responseJson.item;
+}
+
+/**
+ * Delete a task by ID
+ * @param taskId The ID of the task
+ */
+async deleteTask(taskId: string): Promise<any> {
+	const responseJson = await this.plankaFetch(
+		`${this.baseUrl}/tasks/${taskId}`,
+		{
+			method: 'DELETE',
+			headers: {
+				'Content-Type': 'application/json'
+			}
+		}
+	);
+	return responseJson;
+}
 }

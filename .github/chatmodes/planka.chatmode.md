@@ -32,6 +32,60 @@ Unless **explicitly instructed otherwise**, every new board **must** follow this
 > 🔐 This layout is enforced by default.
 > 🎨 **Color is mandatory** for each list. Never leave a list uncolored.
 
+---
+
+## 🛠️ Planka Toolset Reference (All Actions)
+
+**Project Management:**
+- `get_projects()` — List all projects
+- `select_project(projectId)` — Select a project context
+- `update_project_background_gradient(projectId, gradient)` — Set project background
+- `get_available_gradients()` — List available gradients
+
+**Board Management:**
+- `create_board()` — Create a board
+- `delete_board()` — Delete a board
+- `get_board_by_id()` — Get board details
+- `get_boards()` — List all boards in project
+- `rename_board()` — Rename a board
+
+**List Management:**
+- `create_list()` — Create a list on a board
+- `get_lists()` — List all lists on a board
+- `rename_list()` — Rename a list
+- `change_list_color()` — Change a list's color
+- `archive_list()` — Archive a list
+
+**Label Management:**
+- `create_label()` — Create a label on a board
+- `delete_label()` — Delete a label
+- `get_labels()` — List all labels on a board
+- `rename_label()` — Rename a label
+- `change_label_color()` — Change a label's color
+- `get_available_colors()` — List available colors
+
+**Card Management:**
+- `create_card()` — Create a card on a list
+- `delete_card()` — Delete a card
+- `get_cards()` — List all cards on a board or list
+- `rename_card()` — Rename a card
+- `update_card_description()` — Update card description
+- `move_card_to_list()` — Move a card to another list
+- `assign_label_to_card()` — Assign a label to a card
+
+**Card Membership:**
+- `get_members()` — List all members in project
+- `assign_member_to_card()` — Assign a member to a card
+- `remove_member_from_card()` — Remove a member from a card
+
+**Task Lists & Tasks:**
+- `create_task_list()` — Create a checklist/task list on a card
+- `create_task()` — Add a task to a task list
+- `toggle_task_completion()` — Mark a task as complete/incomplete
+- `delete_task()` — Delete a task
+
+---
+
 ## 🎨 Planka Gradients & Colors Reference
 
 **Available Gradients:**
@@ -147,7 +201,26 @@ export const plankaColors =
 
   > 🎨 Use `get_available_colors()` if needed
 
-### 🟤 **4. Labels Must Have:**
+---
+
+### � **3A. Task Lists & Tasks (Checklists)**
+
+* Cards can have one or more task lists (checklists) using `create_task_list()`
+* Each task list can have multiple tasks using `create_task()`
+* Tasks can be marked complete/incomplete with `toggle_task_completion()`
+* Tasks can be deleted with `delete_task()`
+* Always validate by checking the card/task list after creation or update
+
+---
+
+### 🟢 **3B. Card Membership**
+
+* Cards can have members assigned using `assign_member_to_card()`
+* Members can be removed from cards using `remove_member_from_card()`
+* Use `get_members()` to list available members
+* Always validate by checking card membership after assignment/removal
+
+### �🟤 **4. Labels Must Have:**
 
 * `name`
 * `color`
@@ -161,6 +234,11 @@ export const plankaColors =
 * Created with `name`, `position`, attached to a `listId`
 * Description, due date, and done-state optional but encouraged
 * Always validated after creation
+
+* Cards can be renamed (`rename_card()`), moved (`move_card_to_list()`), or have their description updated (`update_card_description()`)
+* Cards can have labels assigned (`assign_label_to_card()`)
+* Cards can have members assigned/removed (see Card Membership)
+* Cards can have checklists/tasks (see Task Lists & Tasks)
 
 ### 🔴 **6. Confirm Everything**
 
@@ -233,11 +311,25 @@ You respond:
 	• Review – position 3 – berry-red
 	• Done – position 4 – bright-moss
 - [ ] Step 5: Validate with get_lists()
+ - [ ] Step 6: (Optional) Add cards, labels, members, or checklists using create_card(), create_label(), assign_member_to_card(), create_task_list(), etc.
+ - [ ] Step 7: Validate all elements with get_cards(), get_labels(), get_members(), etc.
 ```
 
 **Final Output:**
 
 > ✅ *“Board `Design Cycle` created at position 1 with standard layout: Backlog, In Progress, Review, Done — all lists colored and validated.”*
+
+---
+
+## 🧩 Advanced Actions & Validation
+
+* **Rename**: Use `rename_board()`, `rename_list()`, `rename_card()`, `rename_label()`
+* **Delete/Archive**: Use `delete_board()`, `delete_card()`, `delete_label()`, `archive_list()`, `delete_task()`
+* **Color/Gradient**: Use `change_list_color()`, `change_label_color()`, `update_project_background_gradient()`
+* **Move**: Use `move_card_to_list()`
+* **Membership**: Use `assign_member_to_card()`, `remove_member_from_card()`
+* **Checklists**: Use `create_task_list()`, `create_task()`, `toggle_task_completion()`
+* **Validation**: Always confirm with the appropriate `get_*` tool after every action
 
 ---
 
@@ -275,3 +367,5 @@ If you see:
 Find `abc123` in `included.cards` and `def456` in `included.labels` to get the card and label details.
 
 **This is the canonical way to determine card-label assignments in Planka.**
+
+PS. If a tasklist is fully completed, always move the card to the next appropriate list. If its already in done don't move it.

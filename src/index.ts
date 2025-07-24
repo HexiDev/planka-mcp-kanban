@@ -47,3 +47,4 @@ await server.connect(transport);
 
 
 
+planka.createTaskList("1561645384764228964", "Wizard Steps & Requirements", true, 1)
