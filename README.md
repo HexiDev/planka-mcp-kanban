@@ -1,13 +1,35 @@
+
+
+
+
+![Planka MCP banner](assets/planka-banner.png)
+
 # Planka MCP
 
-This project integrates Planka with the Model Context Protocol (MCP) server, allowing you to manage Planka boards, cards, lists, and labels via MCP.
+> **Manage your Planka Kanban boards, cards, lists, and labels via the Model Context Protocol (MCP) server.**
 
-## Features
+---
+
+## 🚀 Quick Start
+
+Run the MCP server instantly with NPX (no install required):
+
+```bash
+npx planka-mcp
+```
+This will start the MCP server and expose your Planka integration.
+
+---
+
+## 🛠 Features
 - MCP server for Planka **V2**
 - Dynamic tool registration for Planka resources
 - Environment variable support via `.env`
+- CLI and NPX support for easy usage
 
-## Getting Started
+---
+
+## 📝 Getting Started (Development)
 
 1. **Install dependencies:**
    ```bash
@@ -22,45 +44,63 @@ This project integrates Planka with the Model Context Protocol (MCP) server, all
    PLANKA_API_URL=http://example.com/api
    ```
 
-3. **Build and run the MCP server locally:**
-   First, build the project:
+3. **Build and run locally:**
    ```bash
    npm run build
+   node dist/index.js
    ```
-   Then, start the MCP server using npx and node:
+   Or, use NPX after publishing:
    ```bash
-   npx node dist/index.js
+   npx planka-mcp
    ```
-   This will start the MCP server and expose your Planka integration.
 
-4. **Configure VS Code integration (optional):**
-   To connect VS Code to your locally built MCP server, create a `.vscode/mcp.json` file in your project root. Example:
-   ```jsonc
-   {
-     "servers": {
-       "planka": {
-         "type": "stdio",
-         "command": "npx",
-         "args": [
-           "-y",
-           "node",
-           "dist/index.js"
-         ]
-       }
-     }
-   }
-   ```
-   This configuration allows VS Code to launch and connect to your MCP server using the local build.
+---
 
-## Project Structure
+## 💡 Usage Examples
+
+Start the MCP server (default):
+```bash
+npx planka-mcp
+```
+
+You can also use the CLI in scripts or integrate with other tools that support MCP.
+
+---
+
+## 🖥️ VS Code Integration (Optional)
+
+To connect VS Code to your locally built MCP server, create a `.vscode/mcp.json` file:
+
+```jsonc
+{
+  "servers": {
+    "planka": {
+      "type": "stdio",
+      "command": "npx",
+      "args": [
+        "-y",
+        "node",
+        "dist/index.js"
+      ]
+    }
+  }
+}
+```
+This configuration allows VS Code to launch and connect to your MCP server using the local build.
+
+---
+
+## 📁 Project Structure
+
 - `src/index.ts`: Main entry point
 - `src/lib/planka.ts`: Planka API integration
-
 - `src/tools/`: MCP resource tools (boards, cards, lists, labels, projects)
 
-## TODO
+---
 
-- [ ] Publish a real release to enable NPX usage
+## ✅ TODO
+
+- [x] Publish a real release to enable NPX usage
 - [x] Board management tool (`src/tools/boards.ts`)
 - [x] Card management tool (`src/tools/cards.ts`)
 - [x] List management tool (`src/tools/lists.ts`)
@@ -70,5 +110,7 @@ This project integrates Planka with the Model Context Protocol (MCP) server, all
 - [x] Enhance label management (e.g., editing, deleting, filtering)
 - [x] Add support for card tasks/subtasks (checklists)
 
-## License
+---
+
+## 📄 License
 MIT
