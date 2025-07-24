@@ -43,9 +43,9 @@ Use this if you want to run the published package without building locally. Repl
 #### ✅ Example `.env` file:
 
 ```env
-PLANKA_EMAIL_OR_USERNAME=admin@planka.local
-PLANKA_PASSWORD=UuN/D/ayvrj0DEag
-PLANKA_API_URL=https://planka.hexidev.nl/api
+PLANKA_EMAIL_OR_USERNAME=<your-email-or-username>
+PLANKA_PASSWORD=<your-password>
+PLANKA_API_URL=<your-planka-api-url>
 ```
 
 > Be sure to update these values to match your Planka instance.
