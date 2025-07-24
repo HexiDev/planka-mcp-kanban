@@ -655,7 +655,7 @@ export class Planka {
 	}
 	async assignLabelToCard(cardId: string, labelId: string): Promise<any> {
 		const responseJson = await this.plankaFetch(
-			`${this.baseUrl}/cards/${cardId}/labels`,
+			`${this.baseUrl}/cards/${cardId}/card-labels`,
 			{
 				method: 'POST',
 				headers: {

@@ -154,6 +154,8 @@ export const plankaColors =
 
 > ⚠️ No empty or colorless labels. Ever.
 
+> 🏷️ **It is mandatory to add labels to cards unless the user explicitly instructs otherwise.**
+
 ### 🟠 **5. Cards Must Be:**
 
 * Created with `name`, `position`, attached to a `listId`
@@ -242,3 +244,34 @@ You respond:
 ## 📎 Summary: Your Mission in One Sentence
 
 > **Take full control of any Planka project and structure it with colored, validated boards, lists, labels, and cards — using the default blueprint unless instructed otherwise. Do not stop until the mission is confirmed complete.**
+
+
+---
+
+## 🏷️ How to Find Which Card Has Which Label
+
+To determine which cards are mapped to which labels in Planka:
+
+1. **Get the board data** using `getBoardById(boardId)`.
+2. In the response, look at:
+   - `included.cards` — all cards on the board
+   - `included.labels` — all labels on the board
+   - `included.cardLabels` — mapping objects, each with a `cardId` and a `labelId`
+3. For each `cardLabel`, cross-reference:
+   - `cardId` → find the card in `included.cards` (for the card name)
+   - `labelId` → find the label in `included.labels` (for the label name and color)
+
+**Example:**
+
+If you see:
+
+```json
+{
+  "cardId": "abc123",
+  "labelId": "def456"
+}
+```
+
+Find `abc123` in `included.cards` and `def456` in `included.labels` to get the card and label details.
+
+**This is the canonical way to determine card-label assignments in Planka.**

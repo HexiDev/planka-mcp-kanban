@@ -66,13 +66,12 @@ This project integrates Planka with the Model Context Protocol (MCP) server, all
 - [x] List management tool (`src/tools/lists.ts`)
 - [x] Label management tool (`src/tools/labels.ts`)
 - [x] Project management tool (`src/tools/projects.ts`)
+- [x] Enhance label management (e.g., editing, deleting, filtering)
 - [ ] Support assigning members to cards
-- [ ] Enhance label management (e.g., editing, deleting, filtering)
 - [ ] Add support for card tasks/subtasks (checklists)
 - [ ] Add support for file attachments on cards
 - [ ] Implement card task lists with completion tracking
 
-**⚠️ Note:** Label assignment to as card is not supported due to a bug with the Planka API.
 
 ## License
 MIT
