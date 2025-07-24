@@ -13,11 +13,25 @@ const server = new McpServer({
 	version: "1.0.0"
 });
 
-// Initialize Planka instance (replace with your credentials and baseUrl)
+
+// Validate required environment variables
+const requiredEnv = [
+	"PLANKA_EMAIL_OR_USERNAME",
+	"PLANKA_PASSWORD",
+	"PLANKA_API_URL"
+];
+const missingEnv = requiredEnv.filter((key) => !process.env[key]);
+if (missingEnv.length > 0) {
+	console.error(`\nERROR: Missing required environment variable(s): ${missingEnv.join(", ")}`);
+	console.error("Please set them in your environment or .env file before starting the server.\n");
+	process.exit(1);
+}
+
+// Initialize Planka instance
 const planka = await Planka.init(
-	process.env.PLANKA_EMAIL_OR_USERNAME || "admin",
-	process.env.PLANKA_PASSWORD || "admin",
-	process.env.PLANKA_API_URL || "http://example.com/api",
+	process.env.PLANKA_EMAIL_OR_USERNAME!,
+	process.env.PLANKA_PASSWORD!,
+	process.env.PLANKA_API_URL!,
 );
 
 
