@@ -1,9 +1,14 @@
 {
 	"servers": {
+		"planka": {
+			"type": "stdio",
+			"command": "npx",
+			"args": [
+				"-y",
+				"node",
+				"/root/planka-mcp/dist/index.js"
+			]
+		},
 		
-    "github": {
-      "type": "http",
-      "url": "https://api.githubcopilot.com/mcp/"
-    }
 	}
 }
