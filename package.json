@@ -1,7 +1,7 @@
 {
   "type": "module",
   "name": "planka-mcp",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "A Model Context Protocol (MCP) server for managing Planka boards, cards, lists, and labels via CLI and NPX.",
   "bin": {
     "planka-mcp": "dist/index.js"
