@@ -4,7 +4,7 @@
   ],
   "type": "module",
   "name": "planka-mcp",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "A Model Context Protocol (MCP) server for managing Planka boards, cards, lists, and labels via CLI and NPX.",
   "bin": {
     "planka-mcp": "dist/index.js"
@@ -24,6 +24,10 @@
     "start": "node dist/index.js",
     "dev": "nodemon src/index.ts"
     ,"prepublishOnly": "chmod +x dist/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/HexiDev/planka-mcp-kanban.git"
   },
   "license": "ISC",
   "devDependencies": {
