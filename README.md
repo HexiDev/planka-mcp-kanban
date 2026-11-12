@@ -35,7 +35,7 @@ Add the following configuration to your `.vscode/mcp.json` file:
     "planka": {
       "type": "stdio",
       "command": "npx",
-      "args": ["-y", "@hexidev/planka-mcp"],
+      "args": ["-y", "@hexidev/planka-mcp-kanban"],
       "env": {
         "PLANKA_EMAIL_OR_USERNAME": "your-email-or-username",
         "PLANKA_PASSWORD": "your-password",
@@ -70,7 +70,7 @@ Once configured, start the MCP server from your editor.
 You can also run it directly:
 
 ```bash
-npx -y @hexidev/planka-mcp
+npx -y @hexidev/planka-mcp-kanban
 ```
 
 The server communicates over STDIO and can be used by any compatible MCP client.
