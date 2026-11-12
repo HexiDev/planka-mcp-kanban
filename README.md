@@ -8,7 +8,7 @@ Create and manage boards, lists, cards, and labels from any MCP-compatible clien
 
 [![Planka v2](https://img.shields.io/badge/Planka-v2-blue)](https://github.com/plankanban/planka)
 [![MCP](https://img.shields.io/badge/Protocol-MCP-green)](https://modelcontextprotocol.io/)
-[![npm](https://img.shields.io/badge/package-%40hexidev%2Fplanka--mcp-purple)](https://www.npmjs.com/package/@hexidev/planka-mcp)
+[![npm](https://img.shields.io/npm/v/planka-mcp?color=purple)](https://www.npmjs.com/package/planka-mcp)
 
 ## Features
 
@@ -35,7 +35,7 @@ Add the following configuration to your `.vscode/mcp.json` file:
     "planka": {
       "type": "stdio",
       "command": "npx",
-      "args": ["-y", "@hexidev/planka-mcp"],
+      "args": ["-y", "planka-mcp"],
       "env": {
         "PLANKA_EMAIL_OR_USERNAME": "your-email-or-username",
         "PLANKA_PASSWORD": "your-password",
@@ -50,12 +50,12 @@ Replace the example values with your Planka credentials and API URL.
 
 ### 2. Install the package
 
-The package is published publicly on [npm](https://www.npmjs.com/package/@hexidev/planka-mcp), so no registry authentication is needed. `npx` will download it automatically.
+The package is published publicly on [npm](https://www.npmjs.com/package/planka-mcp), so no registry authentication is needed. `npx` will download it automatically.
 
 If you prefer a global install:
 
 ```bash
-npm install -g @hexidev/planka-mcp
+npm install -g planka-mcp
 ```
 
 ### 3. Start the server
@@ -65,7 +65,7 @@ Once configured, start the MCP server from your editor.
 You can also run it directly:
 
 ```bash
-npx -y @hexidev/planka-mcp
+npx -y planka-mcp
 ```
 
 The server communicates over STDIO and can be used by any compatible MCP client.
