@@ -8,7 +8,7 @@ Create and manage boards, lists, cards, and labels from any MCP-compatible clien
 
 [![Planka v2](https://img.shields.io/badge/Planka-v2-blue)](https://github.com/plankanban/planka)
 [![MCP](https://img.shields.io/badge/Protocol-MCP-green)](https://modelcontextprotocol.io/)
-[![npm](https://img.shields.io/badge/package-%40hexidev%2Fplanka--mcp-purple)](https://github.com/HexiDev/planka-mcp/packages)
+[![npm](https://img.shields.io/badge/package-%40hexidev%2Fplanka--mcp-purple)](https://www.npmjs.com/package/@hexidev/planka-mcp)
 
 ## Features
 
@@ -48,20 +48,15 @@ Add the following configuration to your `.vscode/mcp.json` file:
 
 Replace the example values with your Planka credentials and API URL.
 
-### 2. Authenticate with GitHub Packages
+### 2. Install the package
 
-The package is published to GitHub Packages, which requires authentication to download.
+The package is published publicly on [npm](https://www.npmjs.com/package/@hexidev/planka-mcp), so no registry authentication is needed. `npx` will download it automatically.
 
-Create an `.npmrc` file in your project or home directory:
+If you prefer a global install:
 
-```ini
-@hexidev:registry=https://npm.pkg.github.com
-//npm.pkg.github.com/:_authToken=YOUR_GITHUB_TOKEN
+```bash
+npm install -g @hexidev/planka-mcp
 ```
-
-Your GitHub Personal Access Token (classic) needs the `read:packages` permission.
-
-> Without a valid token, package installation may fail with `401 Unauthorized` or `404 Not Found`.
 
 ### 3. Start the server
 
@@ -167,7 +162,7 @@ To run your local build through VS Code, add the following to `.vscode/mcp.json`
 | Protocol  | Model Context Protocol (MCP) |
 | Transport | STDIO                        |
 | Runtime   | Node.js                      |
-| Package   | GitHub Packages              |
+| Package   | npm (public)                 |
 
 Other MCP-compatible clients should work with the same STDIO configuration, although VS Code is currently the primary tested integration.
 
