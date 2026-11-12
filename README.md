@@ -16,6 +16,8 @@ Create a `.vscode/mcp.json` file in your project root. Choose one of the followi
 
 #### 📦 For quick start / production (using published package):
 
+This package is published to **GitHub Packages** under `@hexidev/planka-mcp`. See [Installing from GitHub Packages](#-installing-from-github-packages) for the required registry authentication.
+
 ```jsonc
 {
   "servers": {
@@ -24,7 +26,7 @@ Create a `.vscode/mcp.json` file in your project root. Choose one of the followi
       "command": "npx",
       "args": [
         "-y",
-        "planka-mcp"
+        "@hexidev/planka-mcp"
       ],
       "env": {
         "PLANKA_EMAIL_OR_USERNAME": "<your-email-or-username>",
@@ -38,6 +40,23 @@ Create a `.vscode/mcp.json` file in your project root. Choose one of the followi
 
 Use this if you want to run the published package without building locally. Replace all placeholders (`<your-email-or-username>`, `<your-password>`, `<your-planka-api-url>`) with your actual Planka credentials and API URL.
 
+#### 📥 Installing from GitHub Packages
+
+`@hexidev/planka-mcp` is published to the **GitHub Packages** npm registry, which requires authentication even for reads. Create an `.npmrc` in your project or home directory with a GitHub Personal Access Token (classic) that has the `read:packages` scope:
+
+```ini
+@hexidev:registry=https://npm.pkg.github.com
+//npm.pkg.github.com/:_authToken=<your-github-token>
+```
+
+Then run the server:
+
+```bash
+npx -y @hexidev/planka-mcp
+```
+
+> If the token is missing or lacks `read:packages`, `npx` will fail with `401 Unauthorized` or `404 Not Found` when resolving `@hexidev/planka-mcp`.
+
 > **Note:** You can also define these variables in a `.env` file or set them directly in your shell environment.
 
 #### ✅ Example `.env` file:
@@ -50,7 +69,7 @@ PLANKA_API_URL=<your-planka-api-url>
 
 > Be sure to update these values to match your Planka instance.
 
-> **Tip:** As of v1.0.3, the published package is fully self-contained and compatible with `npx planka-mcp`.
+> **Tip:** As of v1.0.3, the published package is fully self-contained and compatible with `npx @hexidev/planka-mcp`.
 
 > This configuration should also work with any MCP-compatible editor (e.g., Cursor, Windsurf), though it’s currently only tested in VS Code.
 
@@ -121,7 +140,7 @@ To run the server from your local build:
    Or, if using the published package:
 
    ```bash
-   npx planka-mcp
+   npx -y @hexidev/planka-mcp
    ```
 
 ---
@@ -131,7 +150,7 @@ To run the server from your local build:
 Run the MCP server using the default settings:
 
 ```bash
-npx planka-mcp
+npx -y @hexidev/planka-mcp
 ```
 
 You can also integrate the CLI with scripts or use it in any tool that supports MCP.

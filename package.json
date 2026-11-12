@@ -1,49 +1,49 @@
 {
-  "files": [
-    "dist/"
-  ],
-  "type": "module",
-  "name": "@hexidev/planka-mcp",
-  "version": "1.0.7",
-  "description": "A Model Context Protocol (MCP) server for managing Planka boards, cards, lists, and labels via CLI and NPX.",
-  "bin": {
-    "planka-mcp": "dist/index.js"
-  },
-  "keywords": [
-    "planka",
-    "mcp",
-    "kanban",
-    "cli",
-    "npx",
-    "project-management"
-  ],
-  "author": "HexiDev",
-  "scripts": {
-    "build": "tsc",
-    "postbuild": "echo '#!/usr/bin/env node' | cat - dist/index.js > dist/index.tmp && mv dist/index.tmp dist/index.js",
-    "start": "node dist/index.js",
-    "dev": "nodemon src/index.ts"
-    ,"prepublishOnly": "chmod +x dist/index.js"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/HexiDev/planka-mcp-kanban.git"
-  },
-  "publishConfig": {
-    "registry": "https://npm.pkg.github.com/"
-  },
-  "license": "ISC",
-  "devDependencies": {
-    "@types/node": "^24.0.15",
-    "typescript": "^5.9.0-dev.20250721"
-  },
-  "dependencies": {
-    "@modelcontextprotocol/sdk": "^1.16.0",
-    "@types/dotenv": "^6.1.1",
-    "dotenv": "^17.2.0",
-    "fs": "^0.0.1-security",
-    "nodemon": "^3.1.10",
-    "path": "^0.12.7",
-    "zod": "^3.25.76"
-  }
+	"files": [
+		"dist/"
+	],
+	"type": "module",
+	"name": "@hexidev/planka-mcp",
+	"version": "1.0.8",
+	"description": "A Model Context Protocol (MCP) server for managing Planka boards, cards, lists, and labels via CLI and NPX.",
+	"bin": {
+		"planka-mcp": "dist/index.js"
+	},
+	"keywords": [
+		"planka",
+		"mcp",
+		"kanban",
+		"cli",
+		"npx",
+		"project-management"
+	],
+	"author": "HexiDev",
+	"scripts": {
+		"build": "tsc",
+		"postbuild": "echo '#!/usr/bin/env node' | cat - dist/index.js > dist/index.tmp && mv dist/index.tmp dist/index.js",
+		"start": "node dist/index.js",
+		"dev": "nodemon src/index.ts",
+		"prepublishOnly": "chmod +x dist/index.js"
+	},
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/HexiDev/planka-mcp-kanban.git"
+	},
+	"publishConfig": {
+		"registry": "https://npm.pkg.github.com/"
+	},
+	"license": "ISC",
+	"devDependencies": {
+		"@types/node": "^24.0.15",
+		"typescript": "^5.9.0-dev.20250721"
+	},
+	"dependencies": {
+		"@modelcontextprotocol/sdk": "^1.16.0",
+		"@types/dotenv": "^6.1.1",
+		"dotenv": "^17.2.0",
+		"fs": "^0.0.1-security",
+		"nodemon": "^3.1.10",
+		"path": "^0.12.7",
+		"zod": "^3.25.76"
+	}
 }
