@@ -177,4 +177,4 @@ See [LICENSE](LICENSE) for details.
 
 ---
 
-**Developed by [HexiDev](https://hexidev.dev/)**
+**Developed by [HexiDev](https://hexmedia.nl/)**
