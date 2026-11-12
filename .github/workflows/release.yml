@@ -14,7 +14,11 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
+  integration:
+    uses: ./.github/workflows/integration.yml
+
   release:
+    needs: integration
     runs-on: ubuntu-latest
     steps:
       - name: Checkout

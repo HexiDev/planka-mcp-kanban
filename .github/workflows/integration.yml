@@ -1,0 +1,51 @@
+name: Integration Tests
+
+on:
+  workflow_call:
+
+permissions:
+  contents: read
+
+jobs:
+  integration:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Start Planka
+        run: docker compose -f docker-compose.test.yml up -d
+
+      - name: Wait for Planka API
+        run: |
+          for i in $(seq 1 90); do
+            if curl -fsS http://localhost:3000/api/terms >/dev/null; then
+              echo "Planka is ready"
+              exit 0
+            fi
+            sleep 2
+          done
+          echo "Planka did not become ready"
+          docker compose -f docker-compose.test.yml logs --no-color
+          exit 1
+
+      - name: Run integration tests
+        run: npm run test:integration
+
+      - name: Show Planka logs on failure
+        if: failure()
+        run: docker compose -f docker-compose.test.yml logs --no-color
+
+      - name: Stop Planka
+        if: always()
+        run: docker compose -f docker-compose.test.yml down -v --remove-orphans

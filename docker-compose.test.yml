@@ -1,0 +1,39 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_DB: planka
+      POSTGRES_HOST_AUTH_METHOD: trust
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d planka"]
+      interval: 2s
+      timeout: 3s
+      retries: 30
+
+  planka:
+    image: ghcr.io/plankanban/planka:2.3.1
+    depends_on:
+      postgres:
+        condition: service_healthy
+    ports:
+      - "${PLANKA_TEST_PORT:-3000}:1337"
+    environment:
+      BASE_URL: http://localhost:${PLANKA_TEST_PORT:-3000}
+      DATABASE_URL: postgresql://postgres@postgres/planka
+      SECRET_KEY: ci-test-secret-key-not-for-production
+      DEFAULT_ADMIN_EMAIL: demo@demo.demo
+      DEFAULT_ADMIN_PASSWORD: demo
+      DEFAULT_ADMIN_NAME: Demo Demo
+      DEFAULT_ADMIN_USERNAME: demo
+    healthcheck:
+      test:
+        [
+          "CMD",
+          "node",
+          "-e",
+          "fetch('http://127.0.0.1:1337/api/terms').then((r) => process.exit(r.ok ? 0 : 1)).catch(() => process.exit(1))",
+        ]
+      interval: 3s
+      timeout: 5s
+      retries: 40
+      start_period: 30s
