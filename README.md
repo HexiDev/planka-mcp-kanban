@@ -1,166 +1,180 @@
-![Planka MCP banner](assets/planka-banner.png)
-
 # Planka MCP
 
-> **Easily manage your Planka Kanban boards, cards, lists, and labels using an MCP (Model Context Protocol) server.**
+![Planka MCP banner](assets/planka-banner.png)
 
----
+**Manage your [Planka](https://planka.app/) Kanban boards directly through AI assistants using the Model Context Protocol (MCP).**
 
-## 🚀 Quick Start
+Create and manage boards, lists, cards, and labels from any MCP-compatible client.
 
-The recommended way to run the Planka MCP server during development is through **VS Code integration**. This allows you to quickly launch and connect to the server from within your editor.
+[![Planka v2](https://img.shields.io/badge/Planka-v2-blue)](https://github.com/plankanban/planka)
+[![MCP](https://img.shields.io/badge/Protocol-MCP-green)](https://modelcontextprotocol.io/)
+[![npm](https://img.shields.io/badge/package-%40hexidev%2Fplanka--mcp-purple)](https://github.com/HexiDev/planka-mcp/packages)
 
-### 1. Add MCP Configuration
+## Features
 
-Create a `.vscode/mcp.json` file in your project root. Choose one of the following configurations depending on your use case:
+- **Planka v2 support** - Integrates with the Planka v2 API.
+- **Board management** - Access and manage your Kanban boards.
+- **List management** - Create and organize lists.
+- **Card management** - Manage cards and their contents.
+- **Label management** - Work with board labels.
+- **Dynamic tool registration** - MCP tools are registered dynamically.
+- **Easy configuration** - Supports environment variables and `.env` files.
+- **CLI support** - Run directly through `npx`.
 
-#### 📦 For quick start / production (using published package):
+## Quick Start
 
-This package is published to **GitHub Packages** under `@hexidev/planka-mcp`. See [Installing from GitHub Packages](#-installing-from-github-packages) for the required registry authentication.
+The easiest way to use Planka MCP is through an MCP-compatible editor such as VS Code, Cursor, or Windsurf.
 
-```jsonc
+### 1. Configure your MCP client
+
+Add the following configuration to your `.vscode/mcp.json` file:
+
+```json
 {
   "servers": {
     "planka": {
       "type": "stdio",
       "command": "npx",
-      "args": [
-        "-y",
-        "@hexidev/planka-mcp"
-      ],
+      "args": ["-y", "@hexidev/planka-mcp"],
       "env": {
-        "PLANKA_EMAIL_OR_USERNAME": "<your-email-or-username>",
-        "PLANKA_PASSWORD": "<your-password>",
-        "PLANKA_API_URL": "<your-planka-api-url>"
+        "PLANKA_EMAIL_OR_USERNAME": "your-email-or-username",
+        "PLANKA_PASSWORD": "your-password",
+        "PLANKA_API_URL": "https://your-planka-instance.com/api"
       }
     }
   }
 }
 ```
 
-Use this if you want to run the published package without building locally. Replace all placeholders (`<your-email-or-username>`, `<your-password>`, `<your-planka-api-url>`) with your actual Planka credentials and API URL.
+Replace the example values with your Planka credentials and API URL.
 
-#### 📥 Installing from GitHub Packages
+### 2. Authenticate with GitHub Packages
 
-`@hexidev/planka-mcp` is published to the **GitHub Packages** npm registry, which requires authentication even for reads. Create an `.npmrc` in your project or home directory with a GitHub Personal Access Token (classic) that has the `read:packages` scope:
+The package is published to GitHub Packages, which requires authentication to download.
+
+Create an `.npmrc` file in your project or home directory:
 
 ```ini
 @hexidev:registry=https://npm.pkg.github.com
-//npm.pkg.github.com/:_authToken=<your-github-token>
+//npm.pkg.github.com/:_authToken=YOUR_GITHUB_TOKEN
 ```
 
-Then run the server:
+Your GitHub Personal Access Token (classic) needs the `read:packages` permission.
+
+> Without a valid token, package installation may fail with `401 Unauthorized` or `404 Not Found`.
+
+### 3. Start the server
+
+Once configured, start the MCP server from your editor.
+
+You can also run it directly:
 
 ```bash
 npx -y @hexidev/planka-mcp
 ```
 
-> If the token is missing or lacks `read:packages`, `npx` will fail with `401 Unauthorized` or `404 Not Found` when resolving `@hexidev/planka-mcp`.
+The server communicates over STDIO and can be used by any compatible MCP client.
 
-> **Note:** You can also define these variables in a `.env` file or set them directly in your shell environment.
+## Configuration
 
-#### ✅ Example `.env` file:
+The following environment variables are required:
+
+| Variable                   | Description                            |
+| -------------------------- | -------------------------------------- |
+| `PLANKA_EMAIL_OR_USERNAME` | Your Planka email address or username. |
+| `PLANKA_PASSWORD`          | Your Planka password.                  |
+| `PLANKA_API_URL`           | The API URL of your Planka instance.   |
+
+Alternatively, create a `.env` file in the project root:
 
 ```env
-PLANKA_EMAIL_OR_USERNAME=<your-email-or-username>
-PLANKA_PASSWORD=<your-password>
-PLANKA_API_URL=<your-planka-api-url>
+PLANKA_EMAIL_OR_USERNAME=admin
+PLANKA_PASSWORD=admin
+PLANKA_API_URL=http://localhost:1337/api
 ```
 
-> Be sure to update these values to match your Planka instance.
+## Development
 
-> **Tip:** As of v1.0.3, the published package is fully self-contained and compatible with `npx @hexidev/planka-mcp`.
+Want to contribute or run the server locally?
 
-> This configuration should also work with any MCP-compatible editor (e.g., Cursor, Windsurf), though it’s currently only tested in VS Code.
+### Prerequisites
 
----
+- Node.js
+- npm
+- A running Planka v2 instance
 
-### 2. Build and Run the Server (Development Mode)
+### 1. Clone the repository
 
-To run the server from your local build:
+```bash
+git clone https://github.com/HexiDev/planka-mcp.git
+cd planka-mcp
+```
 
-#### 🛠 Development configuration (`.vscode/mcp.json`):
+### 2. Install dependencies
 
-```jsonc
+```bash
+npm install
+```
+
+### 3. Configure environment variables
+
+Create a `.env` file in the project root:
+
+```env
+PLANKA_EMAIL_OR_USERNAME=admin
+PLANKA_PASSWORD=admin
+PLANKA_API_URL=http://localhost:1337/api
+```
+
+### 4. Build the project
+
+```bash
+npm run build
+```
+
+### 5. Run the server
+
+```bash
+node dist/index.js
+```
+
+### VS Code development configuration
+
+To run your local build through VS Code, add the following to `.vscode/mcp.json`:
+
+```json
 {
   "servers": {
     "planka": {
       "type": "stdio",
-      "command": "npx",
-      "args": [
-        "-y",
-        "node",
-        "dist/index.js"
-      ],
+      "command": "node",
+      "args": ["${workspaceFolder}/dist/index.js"],
       "env": {
-        "PLANKA_EMAIL_OR_USERNAME": "<your-email-or-username>",
-        "PLANKA_PASSWORD": "<your-password>",
-        "PLANKA_API_URL": "<your-planka-api-url>"
+        "PLANKA_EMAIL_OR_USERNAME": "admin",
+        "PLANKA_PASSWORD": "admin",
+        "PLANKA_API_URL": "http://localhost:1337/api"
       }
     }
   }
 }
 ```
 
----
+## Compatibility
 
-## 🛠 Features
+| Component | Support                      |
+| --------- | ---------------------------- |
+| Planka    | v2                           |
+| Protocol  | Model Context Protocol (MCP) |
+| Transport | STDIO                        |
+| Runtime   | Node.js                      |
+| Package   | GitHub Packages              |
 
-* MCP server support for **Planka v2**
-* Dynamic tool registration for boards, lists, cards, and labels
-* `.env`-based environment variable configuration
-* CLI + `npx` support for zero-setup usage
+Other MCP-compatible clients should work with the same STDIO configuration, although VS Code is currently the primary tested integration.
 
----
+## License
 
-## 📝 Getting Started (Development)
-
-1. **Install dependencies**
-
-   ```bash
-   npm install
-   ```
-
-2. **Set up environment variables**
-   Create a `.env` file or export them in your terminal:
-
-   ```env
-   PLANKA_EMAIL_OR_USERNAME=admin
-   PLANKA_PASSWORD=admin
-   PLANKA_API_URL=http://example.com/api
-   ```
-
-3. **Build and run locally**
-
-   ```bash
-   npm run build
-   node dist/index.js
-   ```
-
-   Or, if using the published package:
-
-   ```bash
-   npx -y @hexidev/planka-mcp
-   ```
+See [LICENSE](LICENSE) for details.
 
 ---
 
-## 💡 Usage Examples
-
-Run the MCP server using the default settings:
-
-```bash
-npx -y @hexidev/planka-mcp
-```
-
-You can also integrate the CLI with scripts or use it in any tool that supports MCP.
-
----
-
-## 🖥️ Optional: VS Code Integration
-
-To connect your MCP server to VS Code:
-
-1. Create a `.vscode/mcp.json` file.
-2. Add the appropriate configuration (see "Quick Start" above).
-3. Start the MCP server from the VS Code command palette.
+**Developed by [HexiDev](https://hexidev.dev/)**
