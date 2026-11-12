@@ -305,12 +305,34 @@ export class Planka {
 				(options.headers as Record<string, string>)["Authorization"] = `Bearer ${this.authKey}`;
 			}
 			const response = await fetch(url, options);
-			const responseJson = await response.json();
-			if (responseJson.code && responseJson.message) {
+			const rawBody = await response.text();
+			let responseJson: any = null;
+			try {
+				responseJson = rawBody ? JSON.parse(rawBody) : {};
+			} catch {
+				responseJson = null;
+			}
+			if (!response.ok) {
+				const message =
+					responseJson?.message ||
+					responseJson?.code ||
+					rawBody.slice(0, 200) ||
+					response.statusText;
+				console.error(
+					`Planka API Error (${response.status} ${url}): ${message}`,
+				);
+				throw new Error(
+					`Planka API request failed with status ${response.status} (${response.statusText}) for ${url}: ${message}` +
+					(responseJson?.problems
+						? "\nProblems: " + JSON.stringify(responseJson.problems)
+						: ""),
+				);
+			}
+			if (responseJson?.code && responseJson.message) {
 				console.error(`Planka API Error: ${responseJson.message}`);
 				throw new Error(responseJson.message + "\nProblems: " + JSON.stringify(responseJson.problems || []));
 			}
-			if (responseJson.code) {
+			if (responseJson?.code) {
 				console.error(`Planka API Error: ${responseJson.code}`);
 			}
 			return responseJson;
@@ -333,7 +355,13 @@ export class Planka {
 				body: JSON.stringify({ emailOrUsername, password })
 			}
 		);
-		const authKey = responseJson.item || null;
+		const authKey = responseJson?.item || null;
+		if (!authKey) {
+			throw new Error(
+				`Authentication failed: no access token returned from ${baseUrl}/access-tokens. ` +
+				`Check PLANKA_EMAIL_OR_USERNAME and PLANKA_PASSWORD, and ensure PLANKA_API_URL points to the Planka API root (e.g. ${baseUrl.replace(/\/$/, "")}/api).`,
+			);
+		}
 		return new Planka(emailOrUsername, password, baseUrl, authKey);
 	}
 
