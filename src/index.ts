@@ -8,7 +8,7 @@ import { readdirSync } from "fs";
 import { dirname, join, basename } from "path";
 import { fileURLToPath } from "url";
 import dotenv from "dotenv";
-dotenv.config();
+dotenv.config({ quiet: true });
 
 // Create an MCP server
 const server = new McpServer({
